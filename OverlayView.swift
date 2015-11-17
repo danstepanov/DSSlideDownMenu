@@ -47,42 +47,37 @@ class OverlayView: UIView, UIGestureRecognizerDelegate {
             return
         }
         
-        let centerX = NSLayoutConstraint(item:self,
+        self.superview!.addConstraint(NSLayoutConstraint(item:self,
         attribute:NSLayoutAttribute.CenterX,
         relatedBy:NSLayoutRelation.Equal,
         toItem:self.superview,
         attribute:NSLayoutAttribute.CenterX,
         multiplier:1.0,
-        constant:0)
+        constant:0))
         
-        let width = NSLayoutConstraint(item:self,
+        self.superview!.addConstraint(NSLayoutConstraint(item:self,
         attribute:NSLayoutAttribute.Width,
         relatedBy:NSLayoutRelation.Equal,
         toItem:self.superview,
         attribute:NSLayoutAttribute.Width,
         multiplier:1.0,
-        constant:0)
+        constant:0))
         
-        let height = NSLayoutConstraint(item:self,
+        self.superview!.addConstraint(NSLayoutConstraint(item:self,
         attribute:NSLayoutAttribute.Height,
         relatedBy:NSLayoutRelation.Equal,
         toItem:self.superview,
         attribute:NSLayoutAttribute.Height,
         multiplier:1.0,
-        constant:0)
+        constant:0))
         
-        let top = NSLayoutConstraint(item:self,
+        self.superview!.addConstraint(NSLayoutConstraint(item:self,
         attribute:NSLayoutAttribute.Top,
         relatedBy:NSLayoutRelation.Equal,
         toItem:self.superview,
         attribute:NSLayoutAttribute.Top,
         multiplier:1.0,
-        constant:0)
-
-        self.addConstraint(centerX)
-        self.addConstraint(width)
-        self.addConstraint(height)
-        self.addConstraint(top)
+        constant:0))
         
         self.layoutIfNeeded()
     }

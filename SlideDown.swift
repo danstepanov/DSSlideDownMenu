@@ -28,7 +28,7 @@ public class SlideDownMenu: UIView, UIGestureRecognizerDelegate {
         let view = UILabel(frame: CGRectZero)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.text = "Rules of Engagement"
-        view.font = UIFont(name: "OpenSans-Semibold", size: 18)
+        view.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
         view.textAlignment = NSTextAlignment.Center
         view.textColor = UIColor.blackColor()
         
@@ -41,10 +41,11 @@ public class SlideDownMenu: UIView, UIGestureRecognizerDelegate {
         view.textAlignment = NSTextAlignment.Left
         var style = NSMutableParagraphStyle()
         style.lineSpacing = 2.0
+        let string = NSString(string: "Rolemance is flirtatious interactive fiction, designed to be enjoyed with a partner. \n\nEvery storyline takes dramatic twists and turns based on both your decisions. \n\nRolemance requires strategy to unlock intimacy levels. As both partners increase their intimacy through actions\nand word choices, you’ll discover new risque options in each storyline.\n\nxoxo ")
         let attrString = NSAttributedString(
-            string: "Rolemance is flirtatious interactive fiction, designed to be enjoyed with a partner. \n\nEvery storyline takes dramatic twists and turns based on both your decisions. \n\nRolemance requires strategy to unlock intimacy levels. As both partners increase their intimacy through actions\nand word choices, you’ll discover new risque options in each storyline.\n\nxoxo ",
+            string: string as String,
             attributes: [
-                NSFontAttributeName: UIFont(name: "OpenSans", size: 14.0)!,
+                NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 14.0)!,
                 NSForegroundColorAttributeName: UIColor.blackColor(),
                 NSParagraphStyleAttributeName: style
             ])
@@ -64,7 +65,7 @@ public class SlideDownMenu: UIView, UIGestureRecognizerDelegate {
     }()
     
     private var slideDownPositionConstraint: NSLayoutConstraint = NSLayoutConstraint()
-    private var overlayView: OverlayView = OverlayView(frame: CGRectZero)
+    private var overlayView: OverlayView = OverlayView()
     
     public required init!(coder aDecoder:NSCoder) {
         super.init(coder: aDecoder)
@@ -83,7 +84,7 @@ public class SlideDownMenu: UIView, UIGestureRecognizerDelegate {
         addSubview(titleLabel)
         addSubview(descriptionLabel)
         addSubview(dismissButton)
-        addSubview(overlayView)
+//        addSubview(overlayView)
         
         setNeedsUpdateConstraints()
         updateConstraintsIfNeeded()
@@ -94,7 +95,7 @@ public class SlideDownMenu: UIView, UIGestureRecognizerDelegate {
         titleConstraints()
         descriptionConstraints()
         dismissButtonConstraints()
-        updateConstraints()
+        super.updateConstraints()
     }
     
     func backgroundConstraints() {
@@ -255,9 +256,11 @@ public class SlideDownMenu: UIView, UIGestureRecognizerDelegate {
         
         if self.superview == nil {return}
         
+        setupOverlay()
+        
         let screenHeight: CGFloat = UIScreen.mainScreen().bounds.size.height
         
-        self.addConstraint(NSLayoutConstraint(
+        self.superview!.addConstraint(NSLayoutConstraint(
             item:self,
             attribute:NSLayoutAttribute.Width,
             relatedBy:NSLayoutRelation.Equal,
@@ -266,7 +269,7 @@ public class SlideDownMenu: UIView, UIGestureRecognizerDelegate {
             multiplier:0.877,
             constant:0))
         
-        self.addConstraint(NSLayoutConstraint(
+        self.superview!.addConstraint(NSLayoutConstraint(
             item:self,
             attribute:NSLayoutAttribute.Height,
             relatedBy:NSLayoutRelation.Equal,
@@ -275,7 +278,7 @@ public class SlideDownMenu: UIView, UIGestureRecognizerDelegate {
             multiplier:0.71,
             constant:0))
         
-        self.addConstraint(NSLayoutConstraint(
+        self.superview!.addConstraint(NSLayoutConstraint(
             item:self,
             attribute:NSLayoutAttribute.CenterX,
             relatedBy:NSLayoutRelation.Equal,
@@ -327,7 +330,31 @@ public class SlideDownMenu: UIView, UIGestureRecognizerDelegate {
     }
     
     @IBAction func dismissButtonTouched(sender: AnyObject) {
+        print("Slide Down Dismissed")
         
+        let screenHeight: CGFloat = UIScreen.mainScreen().bounds.size.height
+        
+        UIView.animateWithDuration(
+            animateOutDuration,
+            animations: {
+                self.slideDownPositionConstraint.constant = -(screenHeight/2.0) - 0.1*screenHeight
+                self.layoutIfNeeded()
+            },
+            definitelyCompleted: {
+                UIView.animateWithDuration(
+                    animateOutDuration,
+                    animations: {
+                        self.slideDownPositionConstraint.constant = screenHeight
+                        self.overlayView.alpha = 0.0
+                        self.layoutIfNeeded()
+                    },
+                    definitelyCompleted: {
+                        self.overlayView.dismissView()
+                        self.removeFromSuperview()
+                    }
+                )
+            }
+        )
     }
 }
 

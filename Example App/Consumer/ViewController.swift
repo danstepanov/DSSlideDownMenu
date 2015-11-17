@@ -27,8 +27,6 @@ class ViewController: UIViewController {
     @IBAction func presentSlideDownViewButtonTouched(sender:AnyObject) {
         print("Slide Down Presented")
         let slideDown = SlideDownMenu(frame: CGRectZero)
-        //let slideDown = UIView(frame: self.view.bounds)
-        //slideDown.backgroundColor = UIColor.blackColor()
         let topMostView = UIApplication.sharedApplication().windows.last
         topMostView?.addSubview(slideDown)
     }
