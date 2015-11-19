@@ -27,7 +27,7 @@ public class SlideDownMenu: UIView, UIGestureRecognizerDelegate {
     lazy var titleLabel: UILabel! = {
         let view = UILabel(frame: CGRectZero)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.text = "Rules of Engagement"
+        view.text = "Slide Down Menu"
         view.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
         view.textAlignment = NSTextAlignment.Center
         view.textColor = UIColor.blackColor()
@@ -39,9 +39,10 @@ public class SlideDownMenu: UIView, UIGestureRecognizerDelegate {
         let view = UILabel(frame: CGRectZero)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.textAlignment = NSTextAlignment.Left
+        view.numberOfLines = 30;
         var style = NSMutableParagraphStyle()
         style.lineSpacing = 2.0
-        let string = NSString(string: "Rolemance is flirtatious interactive fiction, designed to be enjoyed with a partner. \n\nEvery storyline takes dramatic twists and turns based on both your decisions. \n\nRolemance requires strategy to unlock intimacy levels. As both partners increase their intimacy through actions\nand word choices, you’ll discover new risque options in each storyline.\n\nxoxo ")
+        let string = NSString(string: "This is an example of the DSSlideDownMenu. Feel free to add any buttons or your own text. \n\nThis version of the component has a static height but the next release will contain a dynamic height that will vary with the amount of the contents in the component. \n\nThis example may be dismissed via either the 'OK' button or by tapping the overlay behind the slide down menu. \n\n- Dan")
         let attrString = NSAttributedString(
             string: string as String,
             attributes: [
