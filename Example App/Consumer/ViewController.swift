@@ -14,9 +14,9 @@ class ViewController: UIViewController {
     lazy var button: UIButton! = {
         let view = UIButton(type: .Custom)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor.yellowColor()
-        view.setTitle("Button", forState: UIControlState.Normal)
-        view.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        view.backgroundColor = UIColor.blackColor()
+        view.setTitle("Click Me!", forState: UIControlState.Normal)
+        view.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         
         //view.textAlignment = .Center
         view.addTarget(self, action: "presentSlideDownViewButtonTouched:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -64,7 +64,7 @@ class ViewController: UIViewController {
             relatedBy:NSLayoutRelation.Equal,
             toItem:self.view,
             attribute:NSLayoutAttribute.Width,
-            multiplier:1.0,
+            multiplier:0.5,
             constant:0))
         
         self.view.addConstraint(NSLayoutConstraint(

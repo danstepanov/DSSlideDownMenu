@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
         self.window = UIWindow.init(frame: UIScreen.mainScreen().bounds)
         
-        self.window?.backgroundColor = UIColor.redColor()
+        self.window?.backgroundColor = UIColor.whiteColor()
         
         let viewController = ViewController()
         
